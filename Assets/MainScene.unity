@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1516861565}
-  smoothSpeed: 1
+  smoothSpeed: 4
 --- !u!1001 &1026324685
 PrefabInstance:
   m_ObjectHideFlags: 0

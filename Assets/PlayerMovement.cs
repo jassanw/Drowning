@@ -4,42 +4,29 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    Rigidbody2D playerRigidBody;
 
-    [SerializeField]
-    float jumpForce;
+    public float movementSpeed=10f;
+
+    Rigidbody2D playerRigidBody;
+    float movement = 0.0f;
+
+ 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("hi");
+        playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        movement = Input.GetAxis("Horizontal") * movementSpeed;
     }
 
-    void OnCollisionEnter2D(Collision2D platformCollider)
+    private void FixedUpdate()
     {
-
-        GameObject colliderGameObject = platformCollider.gameObject;
-        float platformY = colliderGameObject.transform.position.y;
-        float playerY = this.gameObject.transform.position.y;
-
-        float difference = playerY - platformY;
-
-        if (difference > 0.463)
-        {
-            Debug.Log("test");
-            playerRigidBody.AddForce(new Vector3(0, jumpForce, 0), ForceMode2D.Impulse);
-
-        }
-        else
-        {
-            Physics2D.IgnoreCollision(colliderGameObject.GetComponent<Collider2D>(), this.gameObject.GetComponent<Collider2D>(), true);
-        }
-
+        Vector2 velocity = playerRigidBody.velocity;
+        velocity.x = movement;
+        playerRigidBody.velocity = velocity;
     }
 }

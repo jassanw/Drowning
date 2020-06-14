@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlatformGenerator : MonoBehaviour
 {
 
-    [SerializeField] float minYHeight = 0.4f;
-    [SerializeField] float maxYHeight = 3.0f;
-    [SerializeField] GameObject platform;
-    [SerializeField] GameObject intialPlatform;
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject platformContainer;
+    public float minYHeight = 0.4f;
+    public float maxYHeight = 3.0f;
+    public GameObject platform;
+    public GameObject intialPlatform;
+    public GameObject player;
+    public GameObject platformContainer;
 
 
     private float currentMaxPlatformHeight;

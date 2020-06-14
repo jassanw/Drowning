@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaterRising : MonoBehaviour
 {
-    public float risingSpeed = 0.005f;
+    public float risingSpeed = 0.015f;
 
     // Update is called once per frame
     void Update()
@@ -19,9 +19,16 @@ public class WaterRising : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        risingSpeed = 0f;
         other.enabled = false;
+        risingSpeed = 0f;
+        StartCoroutine(Delay(2f));
     }
 
+    private IEnumerator Delay(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Time.timeScale = 0f;
+
+    }
 
 }

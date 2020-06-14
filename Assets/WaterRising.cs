@@ -16,4 +16,12 @@ public class WaterRising : MonoBehaviour
         Vector3 newWaterPosition = new Vector3(currentPosition.x, newWaterPositionY, currentPosition.z);
         transform.position = newWaterPosition;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        risingSpeed = 0f;
+        other.enabled = false;
+    }
+
+
 }

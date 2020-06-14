@@ -10,6 +10,7 @@ public class PlatformGenerator : MonoBehaviour
     [SerializeField] GameObject platform;
     [SerializeField] GameObject intialPlatform;
     [SerializeField] GameObject player;
+    [SerializeField] GameObject platformContainer;
 
   
     private float currentMaxPlatformHeight;
@@ -27,13 +28,11 @@ public class PlatformGenerator : MonoBehaviour
         {
             spawnPosition.y += Random.Range(minYHeight, maxYHeight);
             spawnPosition.x = Random.Range(minXWidth, maxXWidth);
-            if(i == 19)
+            GameObject newPlatform = Instantiate(platform, spawnPosition, Quaternion.identity);
+            newPlatform.transform.parent = platformContainer.transform;
+            if (i == 19)
             {
-                currentMaxPlatformHeight = Instantiate(platform, spawnPosition, Quaternion.identity).transform.position.y ;
-            }
-            else
-            {
-                Instantiate(platform, spawnPosition, Quaternion.identity);
+                currentMaxPlatformHeight = spawnPosition.y;
             }
         }
 
@@ -45,18 +44,15 @@ public class PlatformGenerator : MonoBehaviour
         if (currentMaxPlatformHeight - player.transform.position.y < 20)
         {
             for (int i = 0; i < 20; i++)
-            { 
+            {
                 spawnPosition.y += Random.Range(minYHeight, maxYHeight);
                 spawnPosition.x = Random.Range(minXWidth, maxXWidth);
+                GameObject newPlatform = Instantiate(platform, spawnPosition, Quaternion.identity);
+                newPlatform.transform.parent = platformContainer.transform;
                 if (i == 19)
                 {
-                    currentMaxPlatformHeight = Instantiate(platform, spawnPosition, Quaternion.identity).transform.position.y;
+                    currentMaxPlatformHeight = spawnPosition.y;
                 }
-                else
-                {
-                    Instantiate(platform, spawnPosition, Quaternion.identity);
-                }
-            
             }
         }
     }

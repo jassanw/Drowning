@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterRising : MonoBehaviour
+public class WaterMovement : MonoBehaviour
 {
     public float risingSpeed = 0.015f;
 

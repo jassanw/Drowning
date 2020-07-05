@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class WaterRising : MonoBehaviour
 {
+    [SerializeField] GameObject playerGO;
+    [SerializeField] EndGameController endGameController;
+
     public float risingSpeed = 0.015f;
 
     // Update is called once per frame
@@ -20,15 +23,17 @@ public class WaterRising : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         other.enabled = false;
+
+        endGameController.EnableEndGameScreen();
         risingSpeed = 0f;
         StartCoroutine(Delay(2f));
+
     }
 
     private IEnumerator Delay(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        Time.timeScale = 0f;
+        playerGO.SetActive(false);
 
     }
-
 }

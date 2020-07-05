@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float movementSpeed=10f;
+    public float movementSpeed = 10f;
 
-    Rigidbody2D playerRigidBody;
+    public Rigidbody2D playerRigidBody;
     float movement = 0.0f;
 
- 
+
     // Start is called before the first frame update
     void Start()
     {

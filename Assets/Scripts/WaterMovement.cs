@@ -39,4 +39,19 @@ public class WaterMovement : MonoBehaviour
 
     }
 
+    public void StopWaterMovement()
+    {
+        waterMovement = Speed.stop;
+    }
+
+    public void StartWaterMovement()
+    {
+        waterMovement = Speed.rise;
+    }
+
+    public void ChangeWaterSpeed(float newSpeed)
+    {
+        Speed.rise = newSpeed;
+    }
+
 }

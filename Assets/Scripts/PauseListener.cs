@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PauseListener : MonoBehaviour
 {
     [SerializeField] Button PauseButton;
-    [SerializeField] WaterRising Water;
+    [SerializeField] WaterMovement Water;
     private bool isPaused = false;
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class PauseListener : MonoBehaviour
     {
         if (isPaused)
         {
-            Water.risingSpeed = 0f
+            Water.risingSpeed = 0f;
             PauseButton.gameObject.SetActive(false);
             Time.timeScale = 1;
             isPaused = true;

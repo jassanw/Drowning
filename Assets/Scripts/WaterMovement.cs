@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class WaterMovement : MonoBehaviour
 {
-    public float risingSpeed = 0.015f;
+    WaterSpeed Speed;
+    public float waterMovement;
+
+    void Start()
+    {
+        Speed = new WaterSpeed();
+
+        waterMovement = Speed.rise;
+    }
 
     // Update is called once per frame
     void Update()
     {
         var currentPosition = transform.position;
 
-        var newWaterPositionY = currentPosition.y + risingSpeed;
+        var newWaterPositionY = currentPosition.y + waterMovement;
 
         Vector3 newWaterPosition = new Vector3(currentPosition.x, newWaterPositionY, currentPosition.z);
         transform.position = newWaterPosition;
@@ -20,7 +28,7 @@ public class WaterMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         other.enabled = false;
-        risingSpeed = 0f;
+        waterMovement = Speed.stop;
         StartCoroutine(Delay(2f));
     }
 

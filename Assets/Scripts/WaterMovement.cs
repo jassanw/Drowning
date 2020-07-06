@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaterMovement : MonoBehaviour
 {
     WaterSpeed Speed;
-    public float waterMovement;
+    private float waterMovement;
 
     void Start()
     {

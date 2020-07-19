@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+#pragma warning disable CS069
     [SerializeField] WaterMovement Water;
     [SerializeField] Button PlayButton;
     [SerializeField] Button PauseButton;
+#pragma warning restore CS069
 
     // Start is called before the first frame update
     void Start()

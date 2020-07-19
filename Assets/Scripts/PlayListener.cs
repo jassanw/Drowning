@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class PlayListener : MonoBehaviour
 {
+#pragma warning disable CS0649
     [SerializeField] Button PlayButton;
     [SerializeField] WaterMovement Water;
+#pragma warning restore CS0649
     void Start()
     {
         PlayButton.onClick.AddListener(PlayGame);
     }
+ 
     public void PlayGame()
     {
         Water.StartWaterMovement();

@@ -19,7 +19,7 @@ public class WaterMovement : MonoBehaviour
     {
         var currentPosition = transform.position;
 
-        var newWaterPositionY = currentPosition.y + waterMovement;
+        var newWaterPositionY = currentPosition.y + (risingSpeed * Time.deltaTime);
 
         Vector3 newWaterPosition = new Vector3(currentPosition.x, newWaterPositionY, currentPosition.z);
         transform.position = newWaterPosition;

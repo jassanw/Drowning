@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class WaterRising : MonoBehaviour
 {
-    public float risingSpeed = 0.015f;
+    public float risingSpeed;
 
     // Update is called once per frame
     void Update()
     {
         var currentPosition = transform.position;
 
-        var newWaterPositionY = currentPosition.y + risingSpeed;
+        var newWaterPositionY = currentPosition.y + (risingSpeed * Time.deltaTime);
 
         Vector3 newWaterPosition = new Vector3(currentPosition.x, newWaterPositionY, currentPosition.z);
         transform.position = newWaterPosition;

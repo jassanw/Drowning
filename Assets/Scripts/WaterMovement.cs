@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WaterMovement : MonoBehaviour
 {
+    [SerializeField] EndGameController endGameController;
+    [SerializeField] GameObject playerGO;
     private const float stop = 0f;
     public float rise = 1.5f;
     private float waterMovement;
@@ -27,14 +29,18 @@ public class WaterMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         other.enabled = false;
+
+        endGameController.EnableEndGameScreen();
+   
         StopWaterMovement();
         StartCoroutine(Delay(2f));
+
     }
 
     private IEnumerator Delay(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        Time.timeScale = 0f;
+        playerGO.SetActive(false);
 
     }
 

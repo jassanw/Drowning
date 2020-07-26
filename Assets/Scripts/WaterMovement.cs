@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WaterMovement : MonoBehaviour
 {
+    [SerializeField] EndGameController endGameController;
+    [SerializeField] GameObject playerGO;
     private const float stop = 0f;
     public float rise = 1.5f;
     private float waterMovement;

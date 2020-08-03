@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody2D playerRigidBody;
     float movement = 0.0f;
+    float direction;
 
 
     // Start is called before the first frame update
@@ -21,6 +23,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement = Input.GetAxis("Horizontal") * movementSpeed;
+        
+        if (movement != 0) {
+            direction = movement / Math.Abs(movement);
+            playerRigidBody.transform.localScale = new Vector3(
+                direction * Math.Abs(playerRigidBody.transform.localScale.x), 
+                playerRigidBody.transform.localScale.y, 
+                0
+            );
+        }
     }
 
     private void FixedUpdate()

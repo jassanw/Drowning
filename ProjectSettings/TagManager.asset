@@ -41,9 +41,6 @@ TagManager:
   - name: Background
     uniqueID: 670414549
     locked: 0
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Platform
     uniqueID: 3112241137
     locked: 0
@@ -55,4 +52,7 @@ TagManager:
     locked: 0
   - name: Edges
     uniqueID: 3860432137
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0

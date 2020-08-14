@@ -14,8 +14,8 @@ public class PlatformGenerator : MonoBehaviour
 
 
     private float currentMaxPlatformHeight;
-    private float maxXWidth = 2.887f;
-    private float minXWidth = -2.887f;
+    private float maxXWidth = 2f;
+    private float minXWidth = -2f;
     private Vector3 spawnPosition;
     private GameObject newPlatform;
 

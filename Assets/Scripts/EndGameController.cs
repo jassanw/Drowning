@@ -8,6 +8,7 @@ public class EndGameController : MonoBehaviour
 {
     [SerializeField] Button menuButton;
     [SerializeField] Button replayButton;
+    [SerializeField] Button pauseButton;
 
 
     // Start is called before the first frame update
@@ -26,5 +27,6 @@ public class EndGameController : MonoBehaviour
     public void EnableEndGameScreen()
     {
         gameObject.SetActive(true);
+        pauseButton.gameObject.SetActive(false);
     }
 }

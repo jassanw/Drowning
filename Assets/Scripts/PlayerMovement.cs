@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float movementSpeed = 10f;
+    public float tiltMultiplier = 1.5f;
 
     public Rigidbody2D playerRigidBody;
     float movement = 0.0f;
@@ -23,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         movement = Input.GetAxis("Horizontal") * movementSpeed;
+        if (Input.acceleration.x != 0) {
+            movement = Input.acceleration.x * movementSpeed * tiltMultiplier;
+        }
         
         if (movement != 0) {
             direction = movement / Math.Abs(movement);

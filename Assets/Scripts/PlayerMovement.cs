@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float movementSpeed = 10f;
-    public float tiltMultiplier = 1.5f;
+    public float tiltMultiplier = 3f;
 
     public Rigidbody2D playerRigidBody;
     float movement = 0.0f;
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
             movement = Input.acceleration.x * movementSpeed * tiltMultiplier;
         }
         
-        if (movement != 0) {
+        if (movement > 1 || movement < -1) {
             direction = movement / Math.Abs(movement);
             playerRigidBody.transform.localScale = new Vector3(
                 direction * Math.Abs(playerRigidBody.transform.localScale.x), 

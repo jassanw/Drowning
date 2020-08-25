@@ -18,12 +18,6 @@ public class EndGameController : MonoBehaviour
         replayButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void EnableEndGameScreen()
     {
         gameObject.SetActive(true);

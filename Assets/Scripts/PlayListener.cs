@@ -20,9 +20,4 @@ public class PlayListener : MonoBehaviour
         Time.timeScale = 1;
         PlayButton.gameObject.SetActive(false);
     }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

@@ -8,14 +8,14 @@ public class WaterMovement : MonoBehaviour
     [SerializeField] PlayerMovement playerGO;
     [SerializeField] ScoreSystem scoreSystem;
     private const float stop = 0f;
-    public float rise = 1.5f;
+    public float defaultRisingSpeed = 1.5f;
     private float waterMovement;
 
     private int previousScore = 0;
 
     void Start()
     {
-        waterMovement = rise;
+        waterMovement = defaultRisingSpeed;
     }
 
     // Update is called once per frame
@@ -62,7 +62,7 @@ public class WaterMovement : MonoBehaviour
 
     public void StartWaterMovement()
     {
-        waterMovement = rise;
+        waterMovement = defaultRisingSpeed;
     }
 
     public void ChangeWaterSpeed(float newSpeed)

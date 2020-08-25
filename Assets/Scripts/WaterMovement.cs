@@ -11,6 +11,8 @@ public class WaterMovement : MonoBehaviour
     public float rise = 1.5f;
     private float waterMovement;
 
+    private int previousScore = 0;
+
     void Start()
     {
         waterMovement = rise;
@@ -21,6 +23,8 @@ public class WaterMovement : MonoBehaviour
     {
         var playerPosition = playerGO.GetPosition();
         var currentWaterPosition = transform.position;
+
+        IncreaseWaterSpeed(scoreSystem.GetScore());
 
         if (playerPosition.y - currentWaterPosition.y > 11) {
             Vector3 desiredPosition = new Vector3(currentWaterPosition.x, playerPosition.y - 11);
@@ -64,5 +68,14 @@ public class WaterMovement : MonoBehaviour
     public void ChangeWaterSpeed(float newSpeed)
     {
         waterMovement = newSpeed;
+    }
+
+    public void IncreaseWaterSpeed(int score) {
+        if (previousScore < score) {
+            if (score != 0 && score % 20 == 0) {
+                ChangeWaterSpeed(waterMovement * 1.08f);
+                previousScore = score;
+            }
+        }
     }
 }

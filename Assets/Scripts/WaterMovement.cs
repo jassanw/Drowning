@@ -5,7 +5,8 @@ using UnityEngine;
 public class WaterMovement : MonoBehaviour
 {
     [SerializeField] EndGameController endGameController;
-    [SerializeField] GameObject playerGO;
+    [SerializeField] PlayerMovement playerGO;
+    [SerializeField] ScoreSystem scoreSystem;
     private const float stop = 0f;
     public float rise = 1.5f;
     private float waterMovement;
@@ -18,11 +19,17 @@ public class WaterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var currentPosition = transform.position;
+        var playerPosition = playerGO.GetPosition();
+        var currentWaterPosition = transform.position;
 
-        var newWaterPositionY = currentPosition.y + (waterMovement * Time.deltaTime);
+        if (playerPosition.y - currentWaterPosition.y > 11) {
+            Vector3 desiredPosition = new Vector3(currentWaterPosition.x, playerPosition.y - 11);
+            currentWaterPosition = Vector3.Lerp(currentWaterPosition, desiredPosition, 1.2f * Time.deltaTime);
+        }
 
-        Vector3 newWaterPosition = new Vector3(currentPosition.x, newWaterPositionY, currentPosition.z);
+        var newWaterPositionY = currentWaterPosition.y + (waterMovement * Time.deltaTime);
+
+        Vector3 newWaterPosition = new Vector3(currentWaterPosition.x, newWaterPositionY);
         transform.position = newWaterPosition;
     }
 
@@ -40,7 +47,7 @@ public class WaterMovement : MonoBehaviour
     private IEnumerator Delay(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        playerGO.SetActive(false);
+        playerGO.DeactivatePlayer();
 
     }
 
@@ -56,7 +63,6 @@ public class WaterMovement : MonoBehaviour
 
     public void ChangeWaterSpeed(float newSpeed)
     {
-        rise = newSpeed;
+        waterMovement = newSpeed;
     }
-
 }

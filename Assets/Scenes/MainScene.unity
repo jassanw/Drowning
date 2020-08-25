@@ -1417,7 +1417,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endGameController: {fileID: 588461794825748211}
-  playerGO: {fileID: 1695740130}
+  playerGO: {fileID: 1695740132}
+  scoreSystem: {fileID: 1546735442}
   rise: 1.5
 --- !u!212 &1425033253
 SpriteRenderer:
@@ -1716,6 +1717,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1019695984320398047}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1695740132 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1019695983266176313, guid: 5cabdde4e3c99405b97c37cfc3191e53,
+    type: 3}
+  m_PrefabInstance: {fileID: 1019695984320398047}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695740130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9540a51bb0d50417d83a01028bc9f85c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1900249912
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,6 +2506,11 @@ PrefabInstance:
         type: 3}
       propertyPath: movementSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1019695983266176313, guid: 5cabdde4e3c99405b97c37cfc3191e53,
+        type: 3}
+      propertyPath: tiltMultiplier
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1019695983266176314, guid: 5cabdde4e3c99405b97c37cfc3191e53,
         type: 3}

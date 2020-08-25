@@ -44,4 +44,12 @@ public class PlayerMovement : MonoBehaviour
         velocity.x = movement;
         playerRigidBody.velocity = velocity;
     }
+
+    public Vector3 GetPosition(){
+        return transform.position;
+    }
+
+    public void DeactivatePlayer() {
+        gameObject.SetActive(false);
+    }
 }

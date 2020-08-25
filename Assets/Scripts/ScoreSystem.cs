@@ -45,4 +45,8 @@ public class ScoreSystem : MonoBehaviour
         finalScoreText.text = mainScoreText.text;
     }
 
+    public int GetScore() {
+        return maxHeight;
+    }
+
 }

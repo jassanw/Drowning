@@ -8,6 +8,7 @@ public class ScoreSystem : MonoBehaviour
     public GameObject scoreObject;
 
     public GameObject finalScoreObject;
+    public GameObject pausedScoreObject;
     public GameObject player;
 
     public GameObject firstPlatform;
@@ -22,12 +23,15 @@ public class ScoreSystem : MonoBehaviour
 
     private Text finalScoreText;
 
+    private Text pausedScoreText;
+
     // Start is called before the first frame update
     void Start()
     {
         platformHeight = firstPlatform.transform.position.y;
         mainScoreText = scoreObject.GetComponent<TMP_Text>();
         finalScoreText = finalScoreObject.GetComponent<Text>();
+        pausedScoreText = pausedScoreObject.GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -43,6 +47,7 @@ public class ScoreSystem : MonoBehaviour
 
         mainScoreText.text = maxHeight.ToString();
         finalScoreText.text = mainScoreText.text;
+        pausedScoreText.text = mainScoreText.text;
     }
 
     public int GetScore() {

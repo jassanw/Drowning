@@ -11,13 +11,7 @@ public class PauseButtonController : MonoBehaviour
 
     void Start()
     {
-        PauseButton.onClick.AddListener(PauseGame);
+        PauseButton.onClick.AddListener(PauseMenu.PauseGame);
     }
-    public void PauseGame()
-    {
-        Water.StopWaterMovement();
-        Time.timeScale = 0;
-        PauseButton.gameObject.SetActive(false);
-        PauseMenu.EnablePauseMenu();
-    }
+
 }

@@ -37,6 +37,10 @@ public class WaterMovement : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider other) {
+        Debug.Log(other);
+    }
+
     private IEnumerator Delay(float seconds)
     {
         yield return new WaitForSeconds(seconds);

@@ -1,10 +1,14 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreSystem : MonoBehaviour
 {
+    public GameObject scoreObject;
+
+    public GameObject finalScoreObject;
+    public GameObject pausedScoreObject;
     public GameObject player;
 
     public GameObject firstPlatform;
@@ -15,10 +19,19 @@ public class ScoreSystem : MonoBehaviour
 
     public int maxHeight = 0;
 
+    private TMP_Text mainScoreText;
+
+    private Text finalScoreText;
+
+    private Text pausedScoreText;
+
     // Start is called before the first frame update
     void Start()
     {
         platformHeight = firstPlatform.transform.position.y;
+        mainScoreText = scoreObject.GetComponent<TMP_Text>();
+        finalScoreText = finalScoreObject.GetComponent<Text>();
+        pausedScoreText = pausedScoreObject.GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -30,7 +43,15 @@ public class ScoreSystem : MonoBehaviour
 
         if (maxHeight < height) {
             maxHeight = height;
-        } 
+        }
 
+        mainScoreText.text = maxHeight.ToString();
+        finalScoreText.text = mainScoreText.text;
+        pausedScoreText.text = mainScoreText.text;
     }
+
+    public int GetScore() {
+        return maxHeight;
+    }
+
 }

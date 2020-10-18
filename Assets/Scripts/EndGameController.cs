@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class EndGameController : MonoBehaviour
 {
-    [SerializeField] Button menuButton;
-    [SerializeField] Button replayButton;
-    [SerializeField] Button pauseButton;
-
+    public Button menuButton;
+    public Button replayButton;
+    public Button pauseButton;
+    public GameObject score;
 
     // Start is called before the first frame update
     void Start()
@@ -18,15 +18,10 @@ public class EndGameController : MonoBehaviour
         replayButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void EnableEndGameScreen()
     {
         gameObject.SetActive(true);
         pauseButton.gameObject.SetActive(false);
+        score.SetActive(false);
     }
 }

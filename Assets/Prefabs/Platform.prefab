@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6601333935362472603}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.253, y: -4.085, z: 0}
-  m_LocalScale: {x: 2.2926202, y: 1.9766463, z: 1}
+  m_LocalScale: {x: 5.2702355, y: 4.54388, z: 2.2987826}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -98,12 +98,12 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.02}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.29299104, y: 0}
-  - {x: 0.0019291639, y: 0}
-  - {x: 0.29684937, y: 0}
+  - {x: -0.1, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0.1, y: 0}
 --- !u!114 &4407872093488611416
 MonoBehaviour:
   m_ObjectHideFlags: 0

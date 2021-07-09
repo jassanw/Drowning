@@ -444,18 +444,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed0dabeb8c56f47b88921cf688e982eb, type: 3}
---- !u!114 &80739031 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4407872093488611416, guid: ed0dabeb8c56f47b88921cf688e982eb,
-    type: 3}
-  m_PrefabInstance: {fileID: 80739030}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564127614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8985607f4857444e5aad02e8984f6978, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &181502860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,12 +1857,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28186031ed11074459869ca1da839d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemManager: {fileID: 1991574358}
   minYHeight: 0.8
   maxYHeight: 2.5
-  platform: {fileID: 4407872093488611416, guid: ed0dabeb8c56f47b88921cf688e982eb,
+  platform: {fileID: 6601333935362472603, guid: ed0dabeb8c56f47b88921cf688e982eb,
     type: 3}
-  intialPlatform: {fileID: 80739031}
+  intialPlatform: {fileID: 564127614}
   player: {fileID: 1695740130}
   platformContainer: {fileID: 1387884362}
 --- !u!4 &1900249914
@@ -1911,55 +1898,6 @@ MonoBehaviour:
   intialBrick: {fileID: 564127614}
   player: {fileID: 1695740130}
   BrickContainer: {fileID: 342431162}
---- !u!1 &1991574357
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1991574359}
-  - component: {fileID: 1991574358}
-  m_Layer: 0
-  m_Name: ItemManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1991574358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991574357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab56c338db5d8ae4d9f9bbbf57197553, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1695740132}
-  jumpyBoots: {fileID: 814779797280924923, guid: 192a353fb5029d546849a4aee42e2c36,
-    type: 3}
-  flyingFeather: {fileID: 5645618800425027934, guid: f4e0d45bdbebd8848a81afbd2fe72bb3,
-    type: 3}
-  web: {fileID: 1993900066216797831, guid: 97cd5fc3a24cb26409e538e954cb899a, type: 3}
---- !u!4 &1991574359
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991574357}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.22792196, y: -0.19577911, z: -0.044982385}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &588461793025991393
 CanvasRenderer:
   m_ObjectHideFlags: 0

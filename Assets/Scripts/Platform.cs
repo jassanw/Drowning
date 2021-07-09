@@ -5,16 +5,19 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     public float jumpForce = 10f;
-    public Transform itemPosition;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.relativeVelocity.y <= 0.0f)
         {
-            Player player = collision.collider.GetComponent<Player>();
-            if (player != null)
+            Rigidbody2D playerRB = collision.collider.GetComponent<Rigidbody2D>();
+
+            if (playerRB)
             {
-                player.OnPlatformJump();
+                Vector2 velocity = playerRB.velocity;
+                velocity.y = jumpForce;
+                playerRB.velocity = velocity;
+
             }
         }
     }

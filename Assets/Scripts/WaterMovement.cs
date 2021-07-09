@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaterMovement : MonoBehaviour
 {
     [SerializeField] EndGameController endGameController;
-    [SerializeField] Player playerGO;
+    [SerializeField] PlayerMovement playerGO;
     [SerializeField] ScoreSystem scoreSystem;
     private const float stop = 0f;
     public float defaultRisingSpeed = 1.5f;

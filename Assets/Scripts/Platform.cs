@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class Platform : MonoBehaviour
     public float jumpForce = 10f;
     public Transform itemPosition;
 
+    public static event Action OnPlatformHit;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.relativeVelocity.y <= 0.0f)
@@ -15,6 +17,7 @@ public class Platform : MonoBehaviour
             if (player != null)
             {
                 player.OnPlatformJump();
+                OnPlatformHit?.Invoke();
             }
         }
     }

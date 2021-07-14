@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BrickGenerator : MonoBehaviour
 {
-    public float minYHeight = 0.4f;
-    public float maxYHeight = 10.0f;
+    public float minYHeight = 1.0f;
+    public float maxYHeight = 3.0f;
     private float maxXWidth = 2f;
     private float minXWidth = -2f;
 
@@ -28,7 +28,7 @@ public class BrickGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentMaxBrickHeight - player.transform.position.y < 20)
+        if (currentMaxBrickHeight - player.transform.position.y < 15)
         {
             GenerateBricks();
         }
@@ -36,7 +36,7 @@ public class BrickGenerator : MonoBehaviour
 
     private void GenerateBricks()
     {
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 10; i++)
         {
             spawnPosition.y += Random.Range(minYHeight, maxYHeight);
             spawnPosition.x = Random.Range(minXWidth, maxXWidth);
@@ -46,13 +46,11 @@ public class BrickGenerator : MonoBehaviour
                 spawnPosition, 
                 Quaternion.Euler(0, Rotation(), 0)
             );
-            newBrick.transform.parent = BrickContainer.transform;
 
-            if (i == 29)
-            {
-                currentMaxBrickHeight = spawnPosition.y;
-            }
+            newBrick.transform.parent = BrickContainer.transform;
         }
+        currentMaxBrickHeight = spawnPosition.y;
+
     }
 
     private int Rotation() 

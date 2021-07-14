@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlatformGenerator : MonoBehaviour
 {
 
-    public float minYHeight = 0.4f;
-    public float maxYHeight = 3.0f;
+    public float minYHeight = 0.8f;
+    public float maxYHeight = 2.5f;
     public GameObject platform;
     public GameObject intialPlatform;
     public GameObject player;
@@ -45,11 +45,7 @@ public class PlatformGenerator : MonoBehaviour
             spawnPosition.x = Random.Range(minXWidth, maxXWidth);
             newPlatform = Instantiate(platform, spawnPosition, Quaternion.identity);
             newPlatform.transform.parent = platformContainer.transform;
-            if (i == 19)
-            {
-                currentMaxPlatformHeight = spawnPosition.y;
-            }
         }
-
+        currentMaxPlatformHeight = spawnPosition.y;
     }
 }

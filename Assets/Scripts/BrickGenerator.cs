@@ -28,7 +28,7 @@ public class BrickGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentMaxBrickHeight - player.transform.position.y < 20)
+        if (currentMaxBrickHeight - player.transform.position.y < 10)
         {
             GenerateBricks();
         }

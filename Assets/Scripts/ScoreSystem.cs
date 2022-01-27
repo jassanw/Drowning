@@ -9,6 +9,7 @@ public class ScoreSystem : MonoBehaviour
 
     public GameObject finalScoreObject;
     public GameObject pausedScoreObject;
+    public GameObject highScoreObject;
     public GameObject player;
 
     public GameObject firstPlatform;
@@ -24,6 +25,7 @@ public class ScoreSystem : MonoBehaviour
     private Text finalScoreText;
 
     private Text pausedScoreText;
+    private Text highScoreText;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,8 @@ public class ScoreSystem : MonoBehaviour
         mainScoreText = scoreObject.GetComponent<TMP_Text>();
         finalScoreText = finalScoreObject.GetComponent<Text>();
         pausedScoreText = pausedScoreObject.GetComponent<Text>();
+        highScoreText = highScoreObject.GetComponent<Text>();
+        highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
     }
 
     // Update is called once per frame
@@ -48,6 +52,12 @@ public class ScoreSystem : MonoBehaviour
         mainScoreText.text = maxHeight.ToString();
         finalScoreText.text = mainScoreText.text;
         pausedScoreText.text = mainScoreText.text;
+
+        if (maxHeight >  PlayerPrefs.GetInt("HighScore", 0)){
+            PlayerPrefs.SetInt("HighScore", maxHeight);
+            highScoreText.text = maxHeight.ToString();
+        }
+
     }
 
     public int GetScore() {

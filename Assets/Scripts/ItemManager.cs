@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -7,15 +9,21 @@ public class ItemManager : MonoBehaviour
 {
     [SerializeField] Player player;
 
-
+   
     [SerializeField] Item jumpyBoots;
     [SerializeField] Item flyingFeather;
     [SerializeField] Item web;
 
+    [SerializeField] List<ItemAudioSource> itemAudioSouceList;
+
+    [SerializeField] AudioSource audioSource;
+    private delegate void OnItemFinshed();
+    private Dictionary<Enums.Items, Coroutine> itemCoroutineDict;
 
     private void Start()
     {
         Item.OnItemPickUp += OnItemPickUp;
+        itemCoroutineDict = new Dictionary<Enums.Items, Coroutine>();
     }
 
     private void OnDestroy()
@@ -25,7 +33,11 @@ public class ItemManager : MonoBehaviour
 
     private void OnItemPickUp(Enums.Items itemType)
     {
-        ResetPowerUps();
+        if (itemCoroutineDict.ContainsKey(itemType))
+        {
+            StopCoroutine(itemCoroutineDict[itemType]);
+            itemCoroutineDict.Remove(itemType);
+        }
         switch (itemType)
         {
             case Enums.Items.JumpyBoots:
@@ -44,33 +56,42 @@ public class ItemManager : MonoBehaviour
 
     private void OnJumpyBootsPickUp()
     {
-        player.jumpForce = 14f;
-        StartCoroutine(ItemRunning(3.5f));
+        player.ApplyItemEffect(Enums.Items.JumpyBoots);
+        PlayItemSoundEffect(itemAudioSouceList.FirstOrDefault(x => x.ItemType == Enums.Items.JumpyBoots).ItemPickUpAudioClip);
+        Coroutine bootsCoroutine = StartCoroutine(ItemRunning(3.5f, () => player.RemoveItemEffect(Enums.Items.JumpyBoots)));
+        itemCoroutineDict.Add(Enums.Items.JumpyBoots, bootsCoroutine);
     }
 
     private void OnWebPickUp()
     {
-        player.playerRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
-        StartCoroutine(ItemRunning(1.5f));
+        player.ApplyItemEffect(Enums.Items.Web);
+        PlayItemSoundEffect(itemAudioSouceList.FirstOrDefault(x => x.ItemType == Enums.Items.Web).ItemPickUpAudioClip);
+        Coroutine webCoroutine = StartCoroutine(ItemRunning(1.2f, () => player.RemoveItemEffect(Enums.Items.Web)));
+        itemCoroutineDict.Add(Enums.Items.Web, webCoroutine);
     }
 
     private void OnFlyingFeatherPickUp()
     {
-        player.playerRigidBody.velocity = new Vector2(player.playerRigidBody.velocity.x, 16f);
-        StartCoroutine(ItemRunning(1.3f));
+        player.ApplyItemEffect(Enums.Items.FlyingFeather);
+        PlayItemSoundEffect(itemAudioSouceList.FirstOrDefault(x => x.ItemType == Enums.Items.FlyingFeather).ItemPickUpAudioClip);
+        Coroutine flyingFeatherCoroutine = StartCoroutine(ItemRunning(1.3f,() => player.RemoveItemEffect(Enums.Items.FlyingFeather)));
+        itemCoroutineDict.Add(Enums.Items.FlyingFeather, flyingFeatherCoroutine);
     }
 
-    private void ResetPowerUps()
+    private void PlayItemSoundEffect(AudioClip audioClip)
     {
-        StopAllCoroutines();
-        player.ResetPlayer();
+        if (audioClip == null) return;
+
+        audioSource.clip = audioClip;
+        audioSource.Play();
+     
     }
 
-
-    private IEnumerator ItemRunning(float time)
+    private IEnumerator ItemRunning(float time, OnItemFinshed onItemFinshedDelegate = null)
     {
         yield return new WaitForSeconds(time);
-        player.ResetPlayer();
+        onItemFinshedDelegate?.Invoke();
+        itemCoroutineDict.Remove(Enums.Items.JumpyBoots);
     }
 
     public Item GetRandomItem()
@@ -85,8 +106,15 @@ public class ItemManager : MonoBehaviour
             case Enums.Items.Web:
                 return web;
             default:
-                throw new Exception();
+                throw new Exception("Item not Found");
         }
+    }
+
+    [System.Serializable]
+    private struct ItemAudioSource
+    {
+        public Enums.Items ItemType;
+        public AudioClip ItemPickUpAudioClip;
     }
 
 }

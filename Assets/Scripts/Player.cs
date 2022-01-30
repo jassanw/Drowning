@@ -7,19 +7,23 @@ public class Player : MonoBehaviour
 {
     public float movementSpeed = 10f;
     public float tiltMultiplier = 3f;
+    public float defaultJumpForce = 10f;
     public float jumpForce = 10f;
-    
+
+    [SerializeField] private Sprite golenBootsPlayerSprite;
+    [SerializeField] private Sprite defaultPlayerSprite;
+    [SerializeField] private SpriteRenderer playerSpriteRend;
+    [SerializeField] private AudioSource jumpingAudio;
     public Rigidbody2D playerRigidBody;
     float movement = 0.0f;
     float direction;
-    bool _isSlowingDown;
-    bool _playerFrozen = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
         playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
+        jumpForce = defaultJumpForce;
     }
 
     // Update is called once per frame
@@ -49,10 +53,7 @@ public class Player : MonoBehaviour
         Vector2 velocity = playerRigidBody.velocity;
         velocity.x = movement;
         playerRigidBody.velocity = velocity;
-        if (_isSlowingDown)
-        {
-            playerRigidBody.velocity = playerRigidBody.velocity * 0.98f * Time.fixedDeltaTime;
-        }
+       
     }
 
     public Vector3 GetPosition(){
@@ -68,26 +69,78 @@ public class Player : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void SetDefaultJumpforce()
+    {
+        jumpForce = defaultJumpForce;
+    }
+
     public void ResetPlayer()
     {
         movementSpeed = 10f;
         jumpForce = 10f;
         playerRigidBody.gravityScale = 1;
         playerRigidBody.mass = 1;
-        _isSlowingDown = false;
         playerRigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
-    public void SetPlayerFrozen(bool frozen)
-    {
-        _playerFrozen = frozen;
-    }
 
     public void OnPlatformJump()
     {
         Vector2 velocity = playerRigidBody.velocity;
         velocity.y = jumpForce;
         playerRigidBody.velocity = velocity;
+        jumpingAudio.Play();
+    }
+
+    public void SetGoldenBootsSprite()
+    {
+        playerSpriteRend.sprite = golenBootsPlayerSprite;
+    }
+
+    public void SetDefaultCharacterSprite()
+    {
+        playerSpriteRend.sprite = defaultPlayerSprite;
+    }
+
+    public void RemoveItemEffect(Enums.Items itemType)
+    {
+        switch (itemType)
+        {
+            case Enums.Items.JumpyBoots:
+                SetDefaultCharacterSprite();
+                SetDefaultJumpforce();
+                break;
+
+            case Enums.Items.FlyingFeather:
+                break;
+
+            case Enums.Items.Web:
+                playerRigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+                break;
+            default:
+                return;
+        }
+    }
+
+    public void ApplyItemEffect(Enums.Items itemType)
+    {
+        switch (itemType)
+        {
+            case Enums.Items.JumpyBoots:
+                jumpForce = 14f;
+                SetGoldenBootsSprite();
+                break;
+
+            case Enums.Items.FlyingFeather:
+                playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, 16f);
+                break;
+
+            case Enums.Items.Web:
+                playerRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+                break;
+            default:
+                return;
+        }
     }
 
 

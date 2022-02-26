@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,17 +9,25 @@ public class PauseMenu : MonoBehaviour
 {
 #pragma warning disable CS0649
     [SerializeField] WaterMovement Water;
-    [SerializeField] Button PlayButton;
+    [SerializeField] Button ResumeButton;
     [SerializeField] Button PauseButton;
     [SerializeField] Button MenuButton;
     [SerializeField] Button ReplayButton;
     [SerializeField] GameObject Score;
 #pragma warning restore CS0649
 
+
+
+    public static event Action ResumeButtonClick;
+
     // Start is called before the first frame update
     void Start()
     {
-        PlayButton.onClick.AddListener(PlayGame);
+        ResumeButton.onClick.AddListener(() => Events.ResumeButtonClicked.Invoke());
+        MenuButton.onClick.AddListener(() => Events.MenuButtonClicked.Invoke());
+        ReplayButton.onClick.AddListener(() => Events.ReplayButtonClicked.Invoke());
+       
+        ResumeButton.onClick.AddListener(PlayGame);
         MenuButton.onClick.AddListener(() => {
             PlayGame();
             SceneManager.LoadScene("MainMenu");
@@ -29,13 +38,17 @@ public class PauseMenu : MonoBehaviour
         });
     }
 
+    void OnDestroy()
+    {
+        ResumeButton.onClick.RemoveAllListeners();
+        MenuButton.onClick.RemoveAllListeners();
+        ReplayButton.onClick.RemoveAllListeners();
+    }
+
     public void PauseGame()
     {
-        Score.SetActive(false);
         Water.StopWaterMovement();
         Time.timeScale = 0;
-        EnablePauseMenu();
-        PauseButton.gameObject.SetActive(false);
     }
 
     public void PlayGame()
@@ -52,7 +65,7 @@ public class PauseMenu : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    private void DisablePauseMenu()
+    public void DisablePauseMenu()
     {
         gameObject.SetActive(false);
     }

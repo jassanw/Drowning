@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class DespawnController : MonoBehaviour
 {
-    private void OnBecameInvisible()
+    void OnBecameInvisible()
     {
-
         Destroy(gameObject);
-
     }
 }

@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   tiltMultiplier: 3
+  defaultJumpForce: 10
   jumpForce: 10
   golenBootsPlayerSprite: {fileID: 21300000, guid: 9133906ea55572240ac0c0266e09fb25,
     type: 3}
@@ -134,6 +135,9 @@ MonoBehaviour:
     type: 3}
   playerSpriteRend: {fileID: 1019695983266176310}
   jumpingAudio: {fileID: 4354733137539081591}
+  goldenBootsJumpingSound: {fileID: 8300000, guid: 39b25b6d5f907b941bcf83a40fffaa2d,
+    type: 3}
+  defaultJumpingSound: {fileID: 8300000, guid: d921b89e29166d84d9434eb6eefa462a, type: 3}
   playerRigidBody: {fileID: 4085217082931264654}
 --- !u!50 &4085217082931264654
 Rigidbody2D:

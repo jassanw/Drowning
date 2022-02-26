@@ -1,16 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterMovement : MonoBehaviour
 {
-    [SerializeField] EndGameController endGameController;
+    [SerializeField] EndGameScreen endGameController;
     [SerializeField] Player playerGO;
     [SerializeField] ScoreSystem scoreSystem;
+ 
     private const float stop = 0f;
     public float defaultRisingSpeed = 1.5f;
     private float waterMovement;
-
     private int previousScore = 0;
 
     void Start()
@@ -39,25 +40,10 @@ public class WaterMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        other.enabled = false;
+        Events.PlayerDied.Invoke();
+    }
 
-        endGameController.EnableEndGameScreen();
    
-        StopWaterMovement();
-        StartCoroutine(Delay(2f));
-
-    }
-
-    private void OnTriggerEnter(Collider other) {
-        Debug.Log(other);
-    }
-
-    private IEnumerator Delay(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        playerGO.DeactivatePlayer();
-
-    }
 
     public void StopWaterMovement()
     {
@@ -76,10 +62,12 @@ public class WaterMovement : MonoBehaviour
 
     public void IncreaseWaterSpeed(int score) {
         if (previousScore < score) {
-            if (score != 0 && score % 20 == 0) {
-                ChangeWaterSpeed(waterMovement * 1.08f);
+            if (score != 0 && score % 10 == 0) {
+                ChangeWaterSpeed(waterMovement * 1.02f);
                 previousScore = score;
             }
         }
     }
+
+   
 }

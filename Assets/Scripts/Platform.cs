@@ -9,7 +9,7 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.relativeVelocity.y <= 0.0f)
+        if (collision.relativeVelocity.y <= -0.05f)
         {
             Player player = collision.collider.GetComponent<Player>();
             if (player != null)

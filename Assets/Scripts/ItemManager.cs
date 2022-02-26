@@ -19,9 +19,11 @@ public class ItemManager : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     private delegate void OnItemFinshed();
     private Dictionary<Enums.Items, Coroutine> itemCoroutineDict;
+    private Coroutine test;
 
     private void Start()
     {
+        
         Item.OnItemPickUp += OnItemPickUp;
         itemCoroutineDict = new Dictionary<Enums.Items, Coroutine>();
     }
@@ -58,7 +60,7 @@ public class ItemManager : MonoBehaviour
     {
         player.ApplyItemEffect(Enums.Items.JumpyBoots);
         PlayItemSoundEffect(itemAudioSouceList.FirstOrDefault(x => x.ItemType == Enums.Items.JumpyBoots).ItemPickUpAudioClip);
-        Coroutine bootsCoroutine = StartCoroutine(ItemRunning(3.5f, () => player.RemoveItemEffect(Enums.Items.JumpyBoots)));
+        Coroutine bootsCoroutine = StartCoroutine(ItemRunning(3.5f, () => RemovePlayerItemEffect(Enums.Items.JumpyBoots)));
         itemCoroutineDict.Add(Enums.Items.JumpyBoots, bootsCoroutine);
     }
 
@@ -66,7 +68,7 @@ public class ItemManager : MonoBehaviour
     {
         player.ApplyItemEffect(Enums.Items.Web);
         PlayItemSoundEffect(itemAudioSouceList.FirstOrDefault(x => x.ItemType == Enums.Items.Web).ItemPickUpAudioClip);
-        Coroutine webCoroutine = StartCoroutine(ItemRunning(1.2f, () => player.RemoveItemEffect(Enums.Items.Web)));
+        Coroutine webCoroutine = StartCoroutine(ItemRunning(1.2f, () => RemovePlayerItemEffect(Enums.Items.Web)));
         itemCoroutineDict.Add(Enums.Items.Web, webCoroutine);
     }
 
@@ -74,7 +76,7 @@ public class ItemManager : MonoBehaviour
     {
         player.ApplyItemEffect(Enums.Items.FlyingFeather);
         PlayItemSoundEffect(itemAudioSouceList.FirstOrDefault(x => x.ItemType == Enums.Items.FlyingFeather).ItemPickUpAudioClip);
-        Coroutine flyingFeatherCoroutine = StartCoroutine(ItemRunning(1.3f,() => player.RemoveItemEffect(Enums.Items.FlyingFeather)));
+        Coroutine flyingFeatherCoroutine = StartCoroutine(ItemRunning(1.3f,() => RemovePlayerItemEffect(Enums.Items.FlyingFeather)));
         itemCoroutineDict.Add(Enums.Items.FlyingFeather, flyingFeatherCoroutine);
     }
 
@@ -87,11 +89,16 @@ public class ItemManager : MonoBehaviour
      
     }
 
+    private void RemovePlayerItemEffect(Enums.Items itemType)
+    {
+        player.RemoveItemEffect(itemType);
+        itemCoroutineDict.Remove(itemType);
+    }
+
     private IEnumerator ItemRunning(float time, OnItemFinshed onItemFinshedDelegate = null)
     {
         yield return new WaitForSeconds(time);
         onItemFinshedDelegate?.Invoke();
-        itemCoroutineDict.Remove(Enums.Items.JumpyBoots);
     }
 
     public Item GetRandomItem()
